@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=p32775
+#SBATCH --account=p32222
 #SBATCH --partition=gengpu              # GPU partition (48 h max)
 #SBATCH --gres=gpu:a100:1               # lightning trainer uses a single GPU
 #SBATCH --nodes=1
@@ -12,7 +12,7 @@
 # --- Environment (cluster-standard) ---
 module load python-miniconda3
 eval "$(conda shell.bash hook)"
-source activate /projects/p32775/pythonenvs/state_sets   # change to your env
+source activate /projects/p32222/pythonenvs/state_sets   # change to your env
 
 module load gcc/12.4.0-gcc-8.5.0
 module load cuda/12.4.0-gcc-12.4.0
@@ -32,14 +32,14 @@ python -V || true
 nvcc --version || true
 python -c "import torch; print('CUDA:', torch.version.cuda, 'GPUs:', torch.cuda.device_count())" || true
 
-export WANDB_CACHE_DIR=/projects/p32775/.cache
+export WANDB_CACHE_DIR=/projects/p32222/.cache
 export WANDB_MODE=offline                 # disable WANDB network writes
-export HF_DATASETS_CACHE=/projects/p32775/.cache/hf_datasets
+export HF_DATASETS_CACHE=/projects/p32222/.cache/hf_datasets
 
 # --- Job params ---
-PROJECT_ROOT=/projects/p32775/state-reproduce/baselines          # repo checkout
-DATA_TOML=/projects/p32775/state_toml_files/parse_tomls/donor.toml  # the file you showed
-OUTPUT_DIR=/projects/p32775/state_runs/cpa_parse_donor          # large shared storage
+PROJECT_ROOT=/projects/p32222/state-reproduce/baselines          # repo checkout
+DATA_TOML=${PROJECT_ROOT}/latest-tomls/donor.toml
+OUTPUT_DIR=/projects/p32222/state_runs/cpa_parse_donor          # large shared storage
 mkdir -p "${OUTPUT_DIR}"
 
 cd "${PROJECT_ROOT}"
