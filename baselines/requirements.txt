@@ -8,7 +8,7 @@ annotated-types==0.7.0
 antlr4-python3-runtime==4.9.3
 array-api-compat==1.12.0
 attrs==25.3.0
--e git+https://github.com/Arcinstitute/cell-load.git
+cell-load==0.8.5
 certifi==2025.4.26
 charset-normalizer==3.4.2
 chex==0.1.89
